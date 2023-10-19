@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCI GitOps Demo</title>
+    <style>
+        /* Basic styling; feel free to modify or expand upon */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 40px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="/assets/style.css" />
+</head>
+<body>
+    <main>
+        <header>
+          <a class="logo" href="/">OCI GitOps Demo</a>
+          <form action="/search" method="GET">
+            <input
+              autofocus
+              class="search-input"
+              value="{{ .Query }}"
+              placeholder="Enter a news topic"
+              type="search"
+              name="news"
+            />
+          </form>
+          <a
+            href="https://github.com/tobalo/oci-gitops-webapp"
+            class="button github-button"
+            >View on GitHub</a
+          >
+        </header>
+        <section class="container">
+          <div class="result-count">
+            {{ if .Results }}
+              {{ if (gt .Results.TotalResults 0)}}
+              <p>
+                About <strong>{{ .Results.TotalResults }}</strong> results were
+                found. You are on page <strong>{{ .CurrentPage }}</strong> of
+                <strong> {{ .TotalPages }}</strong>.
+              </p>
+              {{ else if and (ne .Query "") (eq .Results.TotalResults 0) }}
+              <p>No results found for your query: <strong>{{ .Query }}</strong>.</p>
+              {{ end }}
+            {{ end }}
+            </div>
+          <ul class="search-results">
+            {{ range.Results.Articles }}
+            <li class="news-article">
+              <div>
+                <a target="_blank" rel="noreferrer noopener" href="{{.URL}}">
+                  <h3 class="title">{{.Title }}</h3>
+                </a>
+                <p class="description">{{ .Description }}</p>
+                <div class="metadata">
+                  <p class="source">{{ .Source.Name }}</p>
+                  <time class="published-date">{{ .FormatPublishedDate }}</time>
+                </div>
+              </div>
+              <img class="article-image" src="{{ .URLToImage }}" />
+            </li>
+            {{ end }}
+          </ul>
+          <!-- <div class="pagination">
+            {{ if . }}
+              {{ if (gt .NextPage 2) }}
+              <a
+                href="/search?q={{ .Query }}&page={{ .PreviousPage }}"
+                class="button previous-page"
+                >Previous</a
+              >
+              {{ end }}
+              {{ if (ne .IsLastPage true) }}
+              <a
+                href="/search?q={{ .Query }}&page={{ .NextPage }}"
+                class="button next-page"
+                >Next</a
+              >
+              {{ end }}
+            {{ end }}
+            </div> -->
+        </section>
+        <section>
+          <h1>The Power of GitOps and Oracle</h1>
+      
+          <h2>Introduction</h2>
+          <p>GitOps, a term coined by Weaveworks, has taken the DevOps world by storm. At its core, GitOps leverages the benefits of Git - version control, collaboration, and auditing - to drive operations and infrastructure. But how does Oracle fit into this narrative? Oracle, known for its vast suite of enterprise software products, can significantly benefit from the principles of GitOps.</p>
+      
+          <hr>
+      
+          <h2>GitOps: The Basics</h2>
+          <p>GitOps essentially revolves around a few key principles:</p>
+          <ol>
+              <li><strong>Declarative Configuration</strong>: Instead of manually changing configurations or infrastructure, you declare the desired state in code, and automated processes bring the current state in line with the declared state.</li>
+              <li><strong>Version Control</strong>: This declared state is stored in a version control system, typically Git, allowing for easy rollbacks, collaboration, and change tracking.</li>
+              <li><strong>Automated Deployment</strong>: Continuous integration and continuous deployment (CI/CD) tools automatically apply the changes made in the Git repository to the system or infrastructure.</li>
+          </ol>
+      
+          <hr>
+      
+          <h2>Oracle's Place in the GitOps Ecosystem</h2>
+          <p>Oracle's products, especially those in cloud and database services, are essential components of many enterprises. Implementing GitOps principles can bring several benefits to Oracle-powered infrastructure:</p>
+          <ol>
+              <li><strong>Consistency</strong>: Using GitOps ensures that Oracle deployments are consistent. For instance, an Oracle Database configuration or an Oracle Cloud Infrastructure setup remains consistent across different environments.</li>
+              <li><strong>Rollbacks</strong>: If a configuration change leads to an issue, rolling back to a previous, stable state is as simple as reverting a commit in Git.</li>
+              <li><strong>Collaboration</strong>: Oracle administrators, DBAs, and developers can collaboratively work on infrastructure code, proposing changes through pull requests and undergoing a review process before changes are merged and deployed.</li>
+              <li><strong>Auditability</strong>: Every change to Oracle configurations and infrastructure is tracked in Git, providing a clear audit trail of who made changes, when, and why.</li>
+          </ol>
+      
+          <hr>
+      
+          <h2>Real-World Use Case</h2>
+          <p>Imagine a scenario where a company uses Oracle Cloud Infrastructure (OCI) for its operations. By using GitOps:</p>
+          <ul>
+              <li>Infrastructure as Code (IaC) scripts defining OCI resources like compute instances, storage, and networking can be version-controlled in Git.</li>
+              <li>Changes to the infrastructure, such as scaling compute resources or modifying security rules, can be made via pull requests.</li>
+              <li>A CI/CD pipeline can then automatically apply these changes to OCI, ensuring that the infrastructure always matches the declared state in Git.</li>
+          </ul>
+      
+          <hr>
+      
+          <h2>Conclusion</h2>
+          <p>The intersection of Oracle and GitOps promises robust, scalable, and transparent operations. By leveraging the strengths of Git for operations, companies can ensure their Oracle solutions are more maintainable, auditable, and collaborative. Embracing GitOps principles in Oracle ecosystems is not just a trend; it's a strategic move for forward-thinking enterprises.</p>
+      
+          <p><em>This static HTML provides a brief overview of GitOps and how Oracle solutions can benefit from it. For a deeper dive, one could expand on tools that integrate GitOps practices with Oracle products, case studies showcasing successful implementations, and best practices to keep in mind.</em></p>
+      
+        </section>
+      </main>
+  </body>
+</html>
