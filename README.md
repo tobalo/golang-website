@@ -11,3 +11,8 @@ To Run
 ```bash
 go run main.go
 ```
+
+## Docker Build
+```bash
+docker build -t oci-golang-demo .
+```
