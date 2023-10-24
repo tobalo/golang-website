@@ -24,7 +24,7 @@
 <body>
     <main>
         <header>
-          <a class="logo" href="/">OCI GitOps Demo</a>
+          <a class="logo" href="/">News Website</a>
           <form action="/search" method="GET">
             <input
               autofocus
@@ -42,7 +42,9 @@
           >
         </header>
         <section class="container">
+          
           <div class="result-count">
+            <h1>{{ .Title }}</h1>
             {{ if .Results }}
               {{ if (gt .Results.TotalResults 0)}}
               <p>

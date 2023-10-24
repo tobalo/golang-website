@@ -24,5 +24,7 @@ spec:
           value: 3000
         - name: NEWS_API_KEY
           value: "value2"
+        - name: TITLE
+          value: GitOpsIsFun
 ---
 

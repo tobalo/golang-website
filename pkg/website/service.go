@@ -12,13 +12,17 @@ import (
 	"path/filepath"
 	"strconv"
 
+	"github.com/joho/godotenv"
+
 	"tobalo/golang-website/pkg/news"
 )
 
 // Get the current working directory
 var tpl = template.Must(template.ParseFiles(filepath.Join(initTplPath(), "public", "index.html")))
+var err = godotenv.Load()
 
 type Search struct {
+	Title      string
 	Query      string
 	NextPage   int
 	TotalPages int
@@ -51,7 +55,9 @@ func (s *Search) PreviousPage() int {
 }
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
+
 	buf := &bytes.Buffer{}
+	//t := Title{Title: }
 	err := tpl.Execute(buf, nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -86,7 +92,13 @@ func SearchHandler(newsapi *news.Client) http.HandlerFunc {
 			return
 		}
 
+		title := os.Getenv("TITLE")
+		if title == "" {
+			log.Fatal("Env: TITLE must be set")
+		}
+
 		search := &Search{
+			Title:      title,
 			Query:      searchQuery,
 			NextPage:   nextPage,
 			TotalPages: int(math.Ceil(float64(results.TotalResults) / float64(newsapi.PageSize))),

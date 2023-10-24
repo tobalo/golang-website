@@ -26,9 +26,9 @@ func main() {
 	if apiKey == "" {
 		log.Fatal("Env: apiKey must be set")
 	}
-
 	myClient := &http.Client{Timeout: 10 * time.Second}
 	newsapi := news.NewClient(myClient, apiKey, 20)
+	//header := &website.Header{Title: customData}
 	fs := http.FileServer(http.Dir("public/assets"))
 
 	mux := http.NewServeMux()
