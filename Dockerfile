@@ -20,7 +20,8 @@ RUN rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 WORKDIR /server
 COPY --from=builder /bin/yeet yeet
-COPY ./public /server/
+COPY --from=builder /build/public /server/public
+
 
 EXPOSE 80 3000
 

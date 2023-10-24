@@ -16,6 +16,10 @@ go run main.go
 ```bash
 docker build -t oci-golang-demo .
 ```
+## Docker Run
+```bash
+docker run --env-file .env -p 3000:3000 oci-golang-demo
+```
 
 # ArgoCD on Oracle Kubernetes Engine (PUBLIC ENDPOINTS)
 
