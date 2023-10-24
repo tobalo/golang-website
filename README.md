@@ -5,6 +5,7 @@ Get a News API key here: https://newsapi.org/
 ```
 PORT=
 NEWS_API_KEY=
+TITLE=
 ```
 
 To Run
