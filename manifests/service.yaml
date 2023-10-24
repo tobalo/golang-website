@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: golang-news-demo-service
+  namepsace: oci
+  labels:
+    app: golang-news-demo
+spec:
+  selector:
+    app: golang-news-demo
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer  # This will provision a cloud load balancer, change if needed
