@@ -4,21 +4,34 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
+	"log"
 	"math"
 	"net/http"
 	"net/url"
+	"os"
+	"path/filepath"
 	"strconv"
 
 	"tobalo/golang-website/pkg/news"
 )
 
-var tpl = template.Must(template.ParseFiles("./public/index.html"))
+// Get the current working directory
+var tpl = template.Must(template.ParseFiles(filepath.Join(initTplPath(), "public", "index.html")))
 
 type Search struct {
 	Query      string
 	NextPage   int
 	TotalPages int
 	Results    *news.Results
+}
+
+func initTplPath() string {
+	// Get the current working directory
+	wd, err := os.Getwd()
+	if err != nil {
+		log.Fatalf("Failed to get current directory: %v", err)
+	}
+	return wd
 }
 
 func (s *Search) IsLastPage() bool {
