@@ -10,7 +10,8 @@ TITLE=
 
 To Run
 ```bash
-go run main.go
+go mod download
+go run ./cmd/microlith/main.go
 ```
 
 ## Docker Build
