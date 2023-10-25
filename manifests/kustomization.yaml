@@ -4,7 +4,7 @@ resources:
   - deployment.yaml
   - service.yaml
   - namespace.yaml
-namespace: nodeapi
+namespace: oci
 images:
   - name: golang-news-demo
     newName: golang-news-demo-argocd
